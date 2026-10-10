@@ -76,12 +76,6 @@
     <None Include="default.vert">
       <Filter>Resources\Shaders</Filter>
     </None>
-    <None Include="light.frag">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="light.vert">
-      <Filter>Resources\Shaders</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
