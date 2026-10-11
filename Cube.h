@@ -11,6 +11,8 @@ public:
 	glm::vec3 pos;
 	BlockTypes type;
 
+	bool ocludedFaces[6];
+
 	Cube(glm::vec3 pos, BlockTypes type);
 
 	void Draw(Shader& shader, Camera& camera);

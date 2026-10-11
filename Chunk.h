@@ -9,6 +9,7 @@ public:
 	glm::vec2 chunkCoords;
 
 	std::vector<Cube> cubes;
+	std::vector<std::vector<std::vector<int>>> occupied;
 
 	Chunk(glm::vec2 chunkCoords);
 

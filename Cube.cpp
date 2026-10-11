@@ -75,7 +75,7 @@ Cube::Cube(glm::vec3 pos, BlockTypes type)
 	
 
 	std::vector <std::vector<GLuint>> ind;
-	for (unsigned int i = 0; i < sizeof(indices); i)
+	for (unsigned int i = 0; i < sizeof(indices) / sizeof(GLuint); i)
 	{
 		ind.push_back({ indices[i++], indices[i++], indices[i++], indices[i++], indices[i++], indices[i++] });
 	}
@@ -97,6 +97,7 @@ void Cube::Draw(Shader& shader, Camera& camera)
 {
 	for (unsigned int i = 0; i < meshes.size(); i++)
 	{
-		meshes[i].Draw(shader, camera);
+		if (ocludedFaces[i])
+			meshes[i].Draw(shader, camera);
 	}
 }
