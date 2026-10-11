@@ -31,6 +31,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -54,6 +57,9 @@
     <ClInclude Include="VBO.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="brick.png">
@@ -66,6 +72,9 @@
       <Filter>Resources\Textures</Filter>
     </Image>
     <Image Include="..\pop_cat.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="grassBlock.png">
       <Filter>Resources\Textures</Filter>
     </Image>
   </ItemGroup>

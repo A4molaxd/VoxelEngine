@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="EBO.cpp" />
     <ClCompile Include="gl.c" />
     <ClCompile Include="Main.cpp" />
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Texture.h" />
@@ -176,6 +178,7 @@
   <ItemGroup>
     <Image Include="..\pop_cat.png" />
     <Image Include="brick.png" />
+    <Image Include="grassBlock.png" />
     <Image Include="planks.png" />
     <Image Include="planksSpec.png" />
   </ItemGroup>
