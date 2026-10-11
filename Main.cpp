@@ -27,6 +27,8 @@ int main()
 
 	glViewport(0, 0, width, height);
 
+	InitBlockTypes();
+
 	Shader shaderProgram("default.vert", "default.frag");
 
 	

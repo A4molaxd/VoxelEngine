@@ -1,8 +1,9 @@
 #include"Cube.h"
 
-Cube::Cube(glm::vec3 pos)
+Cube::Cube(glm::vec3 pos, BlockTypes type)
 {
 	Cube::pos = pos;
+	Cube::type = type;
 
 	Vertex vertices[] =
 	{
@@ -71,15 +72,7 @@ Cube::Cube(glm::vec3 pos)
 		20, 22, 23
 	};
 
-	Texture textures[]
-	{
-		Texture("grassBlock.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
-		Texture("dirtBlock.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
-		Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
-		Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
-		Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
-		Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE)
-	};
+	
 
 	std::vector <std::vector<GLuint>> ind;
 	for (unsigned int i = 0; i < sizeof(indices); i)
@@ -87,9 +80,9 @@ Cube::Cube(glm::vec3 pos)
 		ind.push_back({ indices[i++], indices[i++], indices[i++], indices[i++], indices[i++], indices[i++] });
 	}
 	std::vector <std::vector<Texture>> tex;
-	for (unsigned int i = 0; i < sizeof(textures); i)
+	for (unsigned int i = 0; i < BlockType[type].size(); i)
 	{
-		tex.push_back({ textures[i++] });
+		tex.push_back({ BlockType[type][i++] });
 	}
 
 	std::vector <Vertex> verts(vertices, vertices + sizeof(vertices) / sizeof(Vertex));

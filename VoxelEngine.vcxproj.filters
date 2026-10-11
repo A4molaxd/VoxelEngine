@@ -37,6 +37,9 @@
     <ClCompile Include="Chunk.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="BlockTypes.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -67,6 +70,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockTypes.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,4 @@
 #include"Chunk.h"
-#include"Constants.h"
 
 Chunk::Chunk(glm::vec2 chunkCoords)
 {
@@ -11,7 +10,8 @@ Chunk::Chunk(glm::vec2 chunkCoords)
 		{
 			for (unsigned int k = 0; k < chunkLength; k++)
 			{
-				cubes.push_back(Cube(glm::vec3(chunkCoords.x * chunkLength + j, i, chunkCoords.y * chunkWidth + k)));
+				BlockTypes type = i == chunkHeight-1 ? BlockTypes::GRASS_BLOCK : BlockTypes::DIRT_BLOCK;
+				cubes.push_back(Cube(glm::vec3(chunkCoords.x * chunkLength + j, i, chunkCoords.y * chunkWidth + k), type));
 			}
 		}
 	}
