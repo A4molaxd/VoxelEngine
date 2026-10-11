@@ -77,6 +77,12 @@
     <Image Include="grassBlock.png">
       <Filter>Resources\Textures</Filter>
     </Image>
+    <Image Include="grassBlockSide.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="dirtBlock.png">
+      <Filter>Resources\Textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.frag">

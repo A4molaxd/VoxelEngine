@@ -6,11 +6,6 @@ Cube::Cube(glm::vec3 pos)
 
 	Vertex vertices[] =
 	{
-		// BOTTOM FACE (-Y)
-		Vertex{glm::vec3(-1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,-1,0), glm::vec2(0,0)},
-		Vertex{glm::vec3(-1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,-1,0), glm::vec2(0,1)},
-		Vertex{glm::vec3(1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,-1,0), glm::vec2(1,1)},
-		Vertex{glm::vec3(1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,-1,0), glm::vec2(1,0)},
 
 		// TOP FACE (+Y)
 		Vertex{glm::vec3(-1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0, 1,0), glm::vec2(0,0)},
@@ -18,40 +13,46 @@ Cube::Cube(glm::vec3 pos)
 		Vertex{glm::vec3(1.0f,  1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0, 1,0), glm::vec2(1,1)},
 		Vertex{glm::vec3(1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0, 1,0), glm::vec2(1,0)},
 
+		// BOTTOM FACE (-Y)
+		Vertex{glm::vec3(-1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,-1,0), glm::vec2(0,0)},
+		Vertex{glm::vec3(-1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,-1,0), glm::vec2(0,1)},
+		Vertex{glm::vec3(1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,-1,0), glm::vec2(1,1)},
+		Vertex{glm::vec3(1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,-1,0), glm::vec2(1,0)},
+
 		// RIGHT FACE (+X)
-		Vertex{glm::vec3(1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(1,0,0), glm::vec2(0,0)},
-		Vertex{glm::vec3(1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(1,0,0), glm::vec2(0,1)},
-		Vertex{glm::vec3(1.0f,  1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(1,0,0), glm::vec2(1,1)},
-		Vertex{glm::vec3(1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(1,0,0), glm::vec2(1,0)},
+		Vertex{glm::vec3(1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(1,0,0), glm::vec2(1,0)},
+		Vertex{glm::vec3(1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(1,0,0), glm::vec2(0,0)},
+		Vertex{glm::vec3(1.0f,  1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(1,0,0), glm::vec2(0,1)},
+		Vertex{glm::vec3(1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(1,0,0), glm::vec2(1,1)},
 
 		// LEFT FACE (-X)
-		Vertex{glm::vec3(-1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(-1,0,0), glm::vec2(0,0)},
-		Vertex{glm::vec3(-1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(-1,0,0), glm::vec2(0,1)},
-		Vertex{glm::vec3(-1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(-1,0,0), glm::vec2(1,1)},
-		Vertex{glm::vec3(-1.0f,  1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(-1,0,0), glm::vec2(1,0)},
+		Vertex{glm::vec3(-1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(-1,0,0), glm::vec2(1,0)},
+		Vertex{glm::vec3(-1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(-1,0,0), glm::vec2(0,0)},
+		Vertex{glm::vec3(-1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(-1,0,0), glm::vec2(0,1)},
+		Vertex{glm::vec3(-1.0f,  1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(-1,0,0), glm::vec2(1,1)},
 
 		// FRONT FACE (+Z)
-		Vertex{glm::vec3(-1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,0,1), glm::vec2(0,0)},
-		Vertex{glm::vec3(1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,0,1), glm::vec2(0,1)},
-		Vertex{glm::vec3(1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,0,1), glm::vec2(1,1)},
-		Vertex{glm::vec3(-1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,0,1), glm::vec2(1,0)},
+		Vertex{glm::vec3(-1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,0,1), glm::vec2(1,0)},
+		Vertex{glm::vec3(1.0f, -1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,0,1), glm::vec2(0,0)},
+		Vertex{glm::vec3(1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,0,1), glm::vec2(0,1)},
+		Vertex{glm::vec3(-1.0f,  1.0f,  1.0f), glm::vec3(1,1,0), glm::vec3(0,0,1), glm::vec2(1,1)},
 
 		// BACK FACE (-Z)
-		Vertex{glm::vec3(1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,0,-1), glm::vec2(0,0)},
-		Vertex{glm::vec3(-1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,0,-1), glm::vec2(0,1)},
-		Vertex{glm::vec3(-1.0f,  1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,0,-1), glm::vec2(1,1)},
-		Vertex{glm::vec3(1.0f,  1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,0,-1), glm::vec2(1,0)}
+		Vertex{glm::vec3(1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,0,-1), glm::vec2(1,0)},
+		Vertex{glm::vec3(-1.0f, -1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,0,-1), glm::vec2(0,0)},
+		Vertex{glm::vec3(-1.0f,  1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,0,-1), glm::vec2(0,1)},
+		Vertex{glm::vec3(1.0f,  1.0f, -1.0f), glm::vec3(1,1,0), glm::vec3(0,0,-1), glm::vec2(1,1)},
 	};
 
 	GLuint indices[] =
 	{
-		// BOTTOM
-		0,  1,  2,
-		0,  2,  3,
-
 		// TOP
-		4,  6,  5,
-		4,  7,  6,
+		0,  2,  1,
+		0,  3,  2,
+
+		// BOTTOM
+		4,  5,  6,
+		4,  6,  7,
 
 		// RIGHT
 		8,  9, 10,
@@ -73,6 +74,11 @@ Cube::Cube(glm::vec3 pos)
 	Texture textures[]
 	{
 		Texture("grassBlock.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
+		Texture("dirtBlock.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
+		Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
+		Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
+		Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
+		Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE)
 	};
 
 	std::vector <std::vector<GLuint>> ind;
@@ -80,19 +86,18 @@ Cube::Cube(glm::vec3 pos)
 	{
 		ind.push_back({ indices[i++], indices[i++], indices[i++], indices[i++], indices[i++], indices[i++] });
 	}
+	std::vector <std::vector<Texture>> tex;
+	for (unsigned int i = 0; i < sizeof(textures); i)
+	{
+		tex.push_back({ textures[i++] });
+	}
 
 	std::vector <Vertex> verts(vertices, vertices + sizeof(vertices) / sizeof(Vertex));
-	std::vector <Texture> tex(textures, textures + sizeof(textures) / sizeof(Texture));
 
-	meshes =
-	{
-		Mesh(verts, ind[0], tex),
-		Mesh(verts, ind[1], tex),
-		Mesh(verts, ind[2], tex),
-		Mesh(verts, ind[3], tex),
-		Mesh(verts, ind[4], tex),
-		Mesh(verts, ind[5], tex),
-	};
+	
+	for (unsigned int i = 0; i < 6; i++)
+		meshes.push_back(Mesh(verts, ind[i], tex[i]));
+	
 }
 
 void Cube::Draw(Shader& shader, Camera& camera) 
