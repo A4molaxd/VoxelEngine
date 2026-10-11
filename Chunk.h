@@ -1,0 +1,19 @@
+#ifndef CLASS_CHUNK_H
+#define CLASS_CHUNK_H
+
+#include"Cube.h"
+
+class Chunk
+{
+public:
+	glm::vec2 chunkCoords;
+
+	std::vector<Cube> cubes;
+
+	Chunk(glm::vec2 chunkCoords);
+
+	void Draw(Shader& shader, Camera& camera);
+
+};
+
+#endif

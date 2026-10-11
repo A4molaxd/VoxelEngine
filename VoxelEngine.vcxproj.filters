@@ -34,6 +34,9 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -58,6 +61,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

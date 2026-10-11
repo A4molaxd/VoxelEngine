@@ -1,4 +1,4 @@
-#include"Cube.h"
+#include"Chunk.h"
 
 const unsigned int width = 800;
 const unsigned int height = 800;
@@ -29,7 +29,8 @@ int main()
 
 	Shader shaderProgram("default.vert", "default.frag");
 
-	Cube cube(glm::vec3(0.0f));
+	
+	Chunk chunk(glm::vec3(0.0f));
 
 	glm::vec3 cubePos = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::mat4 cubeModel = glm::mat4(1.0f);
@@ -46,10 +47,10 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 
-	glCullFace(GL_FRONT_FACE);
+	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 
-	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 20.0f));
 
 	double crntTime = 0.0;
 	double prevTime = 0.0;
@@ -80,7 +81,7 @@ int main()
 		
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 
-		cube.Draw(shaderProgram, camera);
+		chunk.Draw(shaderProgram, camera);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
