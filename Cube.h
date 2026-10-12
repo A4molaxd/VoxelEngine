@@ -11,7 +11,7 @@ public:
 	glm::vec3 pos;
 	BlockTypes type;
 
-	bool ocludedFaces[6];
+	std::vector<bool> ocludedFaces;
 
 	Cube(glm::vec3 pos, BlockTypes type);
 

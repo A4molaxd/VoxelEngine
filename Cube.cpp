@@ -4,6 +4,8 @@ Cube::Cube(glm::vec3 pos, BlockTypes type)
 {
 	Cube::pos = pos;
 	Cube::type = type;
+	for (unsigned int i = 0; i < 6; i++)
+		ocludedFaces.push_back(true);
 
 	Vertex vertices[] =
 	{
@@ -72,7 +74,6 @@ Cube::Cube(glm::vec3 pos, BlockTypes type)
 		20, 22, 23
 	};
 
-	
 
 	std::vector <std::vector<GLuint>> ind;
 	for (unsigned int i = 0; i < sizeof(indices) / sizeof(GLuint); i)
@@ -87,7 +88,7 @@ Cube::Cube(glm::vec3 pos, BlockTypes type)
 
 	std::vector <Vertex> verts(vertices, vertices + sizeof(vertices) / sizeof(Vertex));
 
-	
+
 	for (unsigned int i = 0; i < 6; i++)
 		meshes.push_back(Mesh(verts, ind[i], tex[i]));
 	
