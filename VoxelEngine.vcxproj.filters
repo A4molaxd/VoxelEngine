@@ -40,6 +40,9 @@
     <ClCompile Include="BlockTypes.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="WorldGen.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -73,6 +76,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="BlockTypes.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldGen.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

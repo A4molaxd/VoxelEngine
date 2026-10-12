@@ -11,7 +11,7 @@ public:
 	std::vector<Cube> cubes;
 	std::vector<std::vector<std::vector<int>>> occupied;
 
-	Chunk(glm::vec2 chunkCoords);
+	Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights);
 
 	void Draw(Shader& shader, Camera& camera);
 	

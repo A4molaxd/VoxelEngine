@@ -1,4 +1,4 @@
-#include"Chunk.h"
+#include"WorldGen.h"
 
 const unsigned int width = 800;
 const unsigned int height = 800;
@@ -33,7 +33,8 @@ int main()
 	Shader shaderProgram("default.vert", "default.frag");
 
 	
-	Chunk chunk(glm::vec3(0.0f));
+	WorldGen world;
+	world.Generate();
 
 	glm::vec3 cubePos = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::mat4 cubeModel = glm::mat4(1.0f);
@@ -85,7 +86,7 @@ int main()
 		
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 
-		chunk.Draw(shaderProgram, camera);
+		world.Draw(shaderProgram, camera);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

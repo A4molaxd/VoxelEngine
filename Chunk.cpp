@@ -25,7 +25,7 @@ void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 
 }
 
-Chunk::Chunk(glm::vec2 chunkCoords)
+Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 {
 	Chunk::chunkCoords = chunkCoords;
 	std::vector<std::vector<std::vector<int>>> occupied(chunkWidth+1, std::vector<std::vector<int>>(chunkHeight+1, std::vector<int>(chunkLength+1, false)));
@@ -36,8 +36,8 @@ Chunk::Chunk(glm::vec2 chunkCoords)
 		{
 			for (unsigned int k = 0; k < chunkLength; k++)
 			{
-				if (j == chunkHeight - 1 and i == 4 and k == 5) continue;
-				BlockTypes type = j == chunkHeight - 1 ? BlockTypes::GRASS_BLOCK : BlockTypes::DIRT_BLOCK;
+				if (j > chunkHeights[i * chunkLength + k]) continue;
+				BlockTypes type = j == chunkHeights[i * chunkLength + k] ? BlockTypes::GRASS_BLOCK : BlockTypes::DIRT_BLOCK;
 				cubes.push_back(Cube(glm::vec3(chunkCoords.x * chunkWidth + i, j, chunkCoords.y * chunkLength + k), type));
 				occupied[i][j][k] = 1;
 			}
