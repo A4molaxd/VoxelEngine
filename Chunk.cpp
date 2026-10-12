@@ -29,13 +29,12 @@ Chunk::Chunk(glm::vec2 chunkCoords)
 			{
 				if (occupied[i][j][k])
 				{
-					std::cout << counter << std::endl;
-					if (j + 1 < chunkWidth) if (occupied[i][j+1][k]) cubes[counter].ocludedFaces[2] = false;
-					if (j - 1 < chunkWidth) if (occupied[i][j-1][k]) cubes[counter].ocludedFaces[3] = false;
-					if (i + 1 < chunkWidth) if (occupied[i+1][j][k]) cubes[counter].ocludedFaces[0] = false;
-					if (i - 1 < chunkWidth) if (occupied[i-1][j][k]) cubes[counter].ocludedFaces[1] = false;
-					if (k + 1 < chunkWidth) if (occupied[i][j][k+1]) cubes[counter].ocludedFaces[4] = false;
-					if (k - 1 < chunkWidth) if (occupied[i][j][k-1]) cubes[counter].ocludedFaces[5] = false;
+					if (i + 1 < chunkWidth) if (occupied[i + 1][j][k]) cubes[counter].ocludedFaces[0] = false;
+					if (i - 1 < chunkWidth) if (occupied[i - 1][j][k]) cubes[counter].ocludedFaces[1] = false;
+					if (j + 1 < chunkWidth) if (occupied[i][j + 1][k]) cubes[counter].ocludedFaces[2] = false;
+					if (j - 1 < chunkWidth) if (occupied[i][j - 1][k]) cubes[counter].ocludedFaces[3] = false;
+					if (k + 1 < chunkWidth) if (occupied[i][j][k + 1]) cubes[counter].ocludedFaces[4] = false;
+					if (k - 1 < chunkWidth) if (occupied[i][j][k - 1]) cubes[counter].ocludedFaces[5] = false;
 					counter++;
 				}
 			}

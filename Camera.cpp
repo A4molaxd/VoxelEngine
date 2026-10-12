@@ -74,12 +74,23 @@ void Camera::Inputs(GLFWwindow* window)
 	{
 		maxVel = 1.0f;
 	}
+	if (!isFocused && glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	{
+		isFocused = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		isFocused = false;
+	}
+	
+
 	Position += vel;
 	if (glm::length(vel) < maxVel)
 		vel += accel;
 	accel *= damping;
 	vel *= damping;
-	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+
+	if (isFocused)
 	{
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
@@ -109,7 +120,7 @@ void Camera::Inputs(GLFWwindow* window)
 
 		glfwSetCursorPos(window, (width / 2), (height / 2));
 	}
-	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE)
+	else
 	{
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		firstClick = true;

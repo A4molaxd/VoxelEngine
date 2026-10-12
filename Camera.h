@@ -32,6 +32,8 @@ class Camera
 		glm::vec3 vel = glm::vec3(0.0f);
 		float sensitivity = 100.0f;
 
+		bool isFocused = true;
+
 		bool firstClick = true;
 
 		Camera(int width, int height, glm::vec3 position);
