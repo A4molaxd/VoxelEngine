@@ -14,7 +14,8 @@ public:
 	Chunk(glm::vec2 chunkCoords);
 
 	void Draw(Shader& shader, Camera& camera);
-
+	
+	void CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied);
 };
 
 #endif
