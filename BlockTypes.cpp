@@ -6,7 +6,7 @@ void InitBlockTypes()
 {
     BlockType[GRASS_BLOCK] = {
         Texture("grassBlock.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
-        Texture("grassBlock.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
+        Texture("dirtBlock.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
         Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
         Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
         Texture("grassBlockSide.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),

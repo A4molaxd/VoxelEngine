@@ -43,7 +43,7 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 			}
 		}
 	}
-	CalculateFaces(occupied);
+	//CalculateFaces(occupied);
 }
 
 void Chunk::Draw(Shader& shader, Camera& camera)

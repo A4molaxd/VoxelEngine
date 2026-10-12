@@ -6,7 +6,7 @@
 class WorldGen
 {
 public:
-	unsigned int seed = 0;
+	unsigned int seed = 134;
 
 	std::vector<Chunk> chunks;
 
