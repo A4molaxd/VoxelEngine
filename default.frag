@@ -49,7 +49,7 @@ vec4 direcLight()
 	vec3 viewDirection = normalize(camPos - crntPos);
 	vec3 reflectionDirection = reflect(-lightDirection, normal);
 	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 8);
-	float specular = specAmount * specularLight;
+	float specular = 0;//specAmount * specularLight;
 
 	return (texture(diffuse0, texCoord) * (diffuse + ambient) + texture(specular0, texCoord).r * specular) * lightColor;
 }

@@ -24,7 +24,12 @@ class Camera
 		int width;
 		int height;
 
-		float speed = 0.1f;
+		float speed = 0.4f;
+		float maxAccel = 5.0f;
+		float maxVel = 1.0f;
+		float damping = 0.6f;
+		glm::vec3 accel = glm::vec3(0.0f);
+		glm::vec3 vel = glm::vec3(0.0f);
 		float sensitivity = 100.0f;
 
 		bool firstClick = true;
