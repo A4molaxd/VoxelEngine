@@ -1,5 +1,4 @@
-#ifndef EBO_CLASS_H
-#define EBO_CLASS_H
+#pragma once
 
 #include<glad/gl.h>
 #include<vector>
@@ -14,5 +13,3 @@ class EBO
 		void Unbind();
 		void Delete();
 };
-
-#endif

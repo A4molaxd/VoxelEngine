@@ -1,5 +1,4 @@
-#ifndef CLASS_CHUNK_H
-#define CLASS_CHUNK_H
+#pragma once
 
 #include"Cube.h"
 
@@ -17,5 +16,3 @@ public:
 	
 	void CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied);
 };
-
-#endif

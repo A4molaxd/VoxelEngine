@@ -1,5 +1,4 @@
-#ifndef WORLD_GEN_CLASS_H
-#define WORLD_GEN_CLASS_H
+#pragma once
 
 #include"Chunk.h"
 #include<numbers>
@@ -15,6 +14,3 @@ public:
 
 	void Draw(Shader& shader, Camera& camera);
 };
-
-
-#endif

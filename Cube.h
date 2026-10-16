@@ -1,5 +1,4 @@
-#ifndef CUBE_CLASS_H
-#define CUBE_CLASS_H
+#pragma once
 
 #include"Mesh.h"
 #include"BlockTypes.h"
@@ -20,6 +19,3 @@ public:
 private:
 	std::vector<Mesh> meshes;
 };
-
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+#pragma once
 
 const unsigned int chunkHeight = 8;
 const unsigned int chunkLength = 8;
@@ -12,5 +11,3 @@ struct Vertex
 	glm::vec3 color;
 	glm::vec2 texUV;
 };
-
-#endif

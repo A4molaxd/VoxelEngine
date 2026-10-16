@@ -1,7 +1,6 @@
-#ifndef CAMERA_CLASS_H
-#define CAMERA_CLASS_H
+#pragma once
 
-#define GLM_ENABLE_EXPERIMENTAL // ??
+#define GLM_ENABLE_EXPERIMENTAL // needed for some functions on glm
 
 #include<glad/gl.h>
 #include<GLFW/glfw3.h>
@@ -42,5 +41,3 @@ class Camera
 		void Matrix(Shader& shader, const char* uniform);
 		void Inputs(GLFWwindow* window);
 };
-
-#endif

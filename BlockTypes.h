@@ -1,5 +1,4 @@
-#ifndef BLOCK_TYPES_H
-#define BLOCK_TYPES_H
+#pragma once
 
 #include"Mesh.h"
 
@@ -14,5 +13,3 @@ enum BlockTypes
 extern std::vector<Texture> BlockType[BlockTypes::COUNT];
 
 void InitBlockTypes();
-
-#endif
