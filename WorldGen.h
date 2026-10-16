@@ -2,15 +2,14 @@
 #define WORLD_GEN_CLASS_H
 
 #include"Chunk.h"
+#include<numbers>
 
 class WorldGen
 {
 public:
-	unsigned int seed = 134;
+	const unsigned int seed = 134;
 
 	std::vector<Chunk> chunks;
-
-	std::vector<int> perlin(glm::vec2 coords);
 	
 	void Generate();
 

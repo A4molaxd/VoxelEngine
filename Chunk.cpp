@@ -3,26 +3,26 @@
 void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 {
 	int counter = 0;
-	for (unsigned int i = 0; i < chunkWidth; i++)
+	for (int i = 0; i < chunkWidth; i++)
 	{
-		for (unsigned int j = 0; j < chunkHeight; j++)
+		for (int j = 0; j < chunkHeight; j++)
 		{
-			for (unsigned int k = 0; k < chunkLength; k++)
+			for (int k = 0; k < chunkLength; k++)
 			{
 				if (occupied[i][j][k])
 				{
-					if (i + 1 < chunkWidth) if (occupied[i + 1][j][k]) cubes[counter].ocludedFaces[2] = false;
-					if (i - 1 < chunkWidth) if (occupied[i - 1][j][k]) cubes[counter].ocludedFaces[3] = false;
-					if (j + 1 < chunkWidth) if (occupied[i][j + 1][k]) cubes[counter].ocludedFaces[0] = false;
-					if (j - 1 < chunkWidth) if (occupied[i][j - 1][k]) cubes[counter].ocludedFaces[1] = false;
-					if (k + 1 < chunkWidth) if (occupied[i][j][k + 1]) cubes[counter].ocludedFaces[4] = false;
-					if (k - 1 < chunkWidth) if (occupied[i][j][k - 1]) cubes[counter].ocludedFaces[5] = false;
-					counter++;
+					if (i + 1 < chunkLength) if (occupied[i + 1][j][k]) cubes[counter].ocludedFaces[2] = false; 
+					if (i - 1 >= 0) if (occupied[i - 1][j][k]) cubes[counter].ocludedFaces[3] = false; 
+					if (j + 1 < chunkHeight) if (occupied[i][j + 1][k]) cubes[counter].ocludedFaces[0] = false;
+					if (j - 1 >= 0) if (occupied[i][j - 1][k]) cubes[counter].ocludedFaces[1] = false; 
+					if (k + 1 < chunkWidth) if (occupied[i][j][k + 1]) cubes[counter].ocludedFaces[4] = false; 
+					if (k - 1 >= 0) if (occupied[i][j][k - 1]) cubes[counter].ocludedFaces[5] = false; 
+					
 				}
+				counter++;
 			}
 		}
 	}
-
 }
 
 Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
@@ -36,18 +36,34 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 		{
 			for (unsigned int k = 0; k < chunkLength; k++)
 			{
-				if (j > chunkHeights[i * chunkLength + k]) continue;
-				BlockTypes type = j == chunkHeights[i * chunkLength + k] ? BlockTypes::GRASS_BLOCK : BlockTypes::DIRT_BLOCK;
+				BlockTypes type = BlockTypes::AIR;
+				if (j > chunkHeights[i * chunkLength + k])
+				{
+					occupied[i][j][k] = 0;
+				}
+				else 
+				{
+					type = j == chunkHeights[i * chunkLength + k] ? BlockTypes::GRASS_BLOCK : BlockTypes::DIRT_BLOCK;
+					occupied[i][j][k] = 1;
+				}
+					
 				cubes.push_back(Cube(glm::vec3(chunkCoords.x * chunkWidth + i, j, chunkCoords.y * chunkLength + k), type));
-				occupied[i][j][k] = 1;
+				
 			}
 		}
 	}
-	//CalculateFaces(occupied);
+	CalculateFaces(occupied);
 }
 
 void Chunk::Draw(Shader& shader, Camera& camera)
 {
+	// TODO: Greedy meshing and other optimization techniques
+	// TODO: Optimize to send all the mesh data to the GPU once per chunk and not block by block
 	for (Cube cube : cubes)
-		cube.Draw(shader, camera);
+	{
+		if (cube.type != BlockTypes::AIR)
+		{
+			cube.Draw(shader, camera);
+		}
+	}
 }

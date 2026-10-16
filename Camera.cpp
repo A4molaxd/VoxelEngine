@@ -82,6 +82,10 @@ void Camera::Inputs(GLFWwindow* window)
 	{
 		isFocused = false;
 	}
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+	{
+		std::cout << Position[0] << "x, " << Position[1] << "y, " << Position[2] << "z." << std::endl;
+	}
 	
 
 	Position += vel;

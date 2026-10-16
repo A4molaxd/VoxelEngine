@@ -5,6 +5,7 @@
 
 enum BlockTypes
 {
+	AIR,
 	GRASS_BLOCK,
 	DIRT_BLOCK,
 	COUNT
