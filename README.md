@@ -13,4 +13,5 @@ Objectives (from more to less probable):
 
 Resources used to look up information:
   - https://0fps.net/2012/06/30/meshing-in-a-minecraft-game/
-  - https://0fps.net/2012/01/14/an-analysis-of-minecraft-like-engines/
+  - https://0fps.net/2012/01/14/an-analysis-of-minecraft-like-engines/ 
+  - https://www.youtube.com/@wsalevan (Very interesting and informative videos on his Minecraft clone)
