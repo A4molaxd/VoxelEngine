@@ -13,6 +13,13 @@ public:
 	Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights);
 
 	void Draw(Shader& shader, Camera& camera);
+
+	void Update();
 	
 	void CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied);
+
+	void CalculateMeshes();
+
+private:
+	std::vector<Mesh> meshes;
 };

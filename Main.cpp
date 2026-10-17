@@ -1,4 +1,4 @@
-#include"WorldGen.h"
+#include"World.h"
 
 const unsigned int width = 800;
 const unsigned int height = 800;
@@ -33,15 +33,16 @@ int main()
 	Shader shaderProgram("default.vert", "default.frag");
 
 	
-	WorldGen world;
-	world.Generate();
+	World world;
+	world.chunkManager.Generate(world.seed);
+
 
 	glm::vec3 cubePos = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::mat4 cubeModel = glm::mat4(1.0f);
 	cubeModel = glm::translate(cubeModel, cubePos);
 
 	glm::vec4 lightColor = glm::vec4(1.0f);
-	glm::vec3 lightPos = glm::vec3(1.0f);
+	glm::vec3 lightPos = glm::vec3(1.0f, 1.0f, 1.0f);
 
 	shaderProgram.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(cubeModel));

@@ -27,6 +27,7 @@ Texture::Texture(const char* image, const char* texType, GLuint slot, GLenum for
 	stbi_image_free(bytes);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
+
 void Texture::texUnit(Shader& shader, const char* uniform, GLuint unit)
 {
 	GLuint texUni = glGetUniformLocation(shader.ID, uniform);

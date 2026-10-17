@@ -1,16 +1,13 @@
 #pragma once
 
-#include"Chunk.h"
-#include<numbers>
+#include"ChunkManager.h"
 
-class WorldGen
+class World
 {
 public:
 	const unsigned int seed = 134;
 
-	std::vector<Chunk> chunks;
-	
-	void Generate();
+	ChunkManager chunkManager;
 
 	void Draw(Shader& shader, Camera& camera);
 };

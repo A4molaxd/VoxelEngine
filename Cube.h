@@ -14,7 +14,7 @@ public:
 
 	Cube(glm::vec3 pos, BlockTypes type);
 
-	void Draw(Shader& shader, Camera& camera);
+	std::vector<Mesh> GetMeshes();
 
 private:
 	std::vector<Mesh> meshes;

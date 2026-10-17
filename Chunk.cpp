@@ -17,12 +17,76 @@ void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 					if (j - 1 >= 0) if (occupied[i][j - 1][k]) cubes[counter].ocludedFaces[1] = false; 
 					if (k + 1 < chunkWidth) if (occupied[i][j][k + 1]) cubes[counter].ocludedFaces[4] = false; 
 					if (k - 1 >= 0) if (occupied[i][j][k - 1]) cubes[counter].ocludedFaces[5] = false; 
-					
 				}
 				counter++;
 			}
 		}
 	}
+}
+
+void Chunk::CalculateMeshes()
+{
+	// This implementation does not account for block rotations
+	std::vector<std::vector<Vertex>> vertices;
+	std::vector<std::vector<GLuint>> indices;
+	std::vector<std::vector<Texture>> textures;
+	std::vector<int> ind;
+	for (unsigned int type = 1; type < BlockTypes::COUNT; type++)
+	{
+		vertices.clear();
+		indices.clear();
+		textures.clear();
+		ind.clear();
+		for (Cube cube : cubes)
+		{
+			if (cube.type == type)
+			{
+				// Get every visible mesh (face) in the cube
+				std::vector<Mesh> m = cube.GetMeshes();
+				for (unsigned int i = 0; i < m.size(); i++)
+				{
+					// Check where its normal points to classify it
+					int t = -1;
+					for (unsigned int v = 0; v < vertices.size(); v++)
+					{
+						if (m[i].vertices[0].normal == vertices[v][0].normal) {
+							t = v;
+						}
+					}
+					// If the normal is not already on a sublist, create a new sublist
+					if (t == -1) {
+						t = vertices.size();
+						vertices.push_back(std::vector<Vertex>());
+						indices.push_back(std::vector<GLuint>());
+						textures.push_back(m[i].textures);
+						ind.push_back(0);
+					}
+					// Add their vertices and indices to the list they belong to
+					for (unsigned int j = 0; j < 4; j++)
+					{
+						vertices[t].push_back(m[i].vertices[j]);
+					} 
+					// TODO: Change direction of the faces for culling
+					indices[t].push_back(0 + ind[t]);
+					indices[t].push_back(2 + ind[t]);
+					indices[t].push_back(1 + ind[t]);
+					indices[t].push_back(0 + ind[t]);
+					indices[t].push_back(3 + ind[t]);
+					indices[t].push_back(2 + ind[t]);
+					ind[t] += 4;
+				}
+			}
+		}
+		for (unsigned int tex = 0; tex < textures.size(); tex++)
+		{
+			Chunk::meshes.push_back(Mesh(vertices[tex], indices[tex], textures[tex]));
+		}
+	}
+}
+
+void Chunk::Update()
+{
+	CalculateMeshes();
 }
 
 Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
@@ -53,17 +117,14 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 		}
 	}
 	CalculateFaces(occupied);
+	Update();
 }
+
+
 
 void Chunk::Draw(Shader& shader, Camera& camera)
 {
-	// TODO: Greedy meshing and other optimization techniques
-	// TODO: Optimize to send all the mesh data to the GPU once per chunk and not block by block
-	for (Cube cube : cubes)
-	{
-		if (cube.type != BlockTypes::AIR)
-		{
-			cube.Draw(shader, camera);
-		}
-	}
+	// TODO: Greedy meshing and other chunk rendering optimization techniques
+	for (Mesh mesh : Chunk::meshes)
+		mesh.Draw(shader, camera);
 }

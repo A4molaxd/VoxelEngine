@@ -1,4 +1,5 @@
-#include"WorldGen.h"
+#include"ChunkManager.h"
+
 
 float fade(float t)
 {
@@ -23,14 +24,14 @@ float clamp(float v, float a, float b)
 	return std::max(a, std::min(b, v));
 }
 
-std::vector<float> perlin(glm::vec2 coords, unsigned int seed) 
+std::vector<float> perlin(glm::vec2 coords, unsigned int seed)
 {
-	std::vector<float> values(chunkLength*chunkWidth);
+	std::vector<float> values(chunkLength * chunkWidth);
 	std::fill(values.begin(), values.end(), 1.0f);
 	std::vector<glm::vec2> corners; // TOP LEFT -> TOP RIGHT -> BOTTOM LEFT -> BOTTOM RIGHT
-	for (unsigned int i = 0; i < 2; i++) 
-	{ 
-		for (unsigned int j = 0; j < 2; j++) 
+	for (unsigned int i = 0; i < 2; i++)
+	{
+		for (unsigned int j = 0; j < 2; j++)
 		{
 			corners.push_back(glm::vec2(((float)rand(coords + glm::vec2(i, j), seed) * 2.0f - 1.0f, ((float)rand2(coords + glm::vec2(i, j), seed) * 2.0f - 1.0f))));
 		}
@@ -47,7 +48,7 @@ std::vector<float> perlin(glm::vec2 coords, unsigned int seed)
 				yi = 0.001f;
 			}
 			// Deleting glm::normalize() smooth things out too much
-			float value = lerp(fade(xi), 
+			float value = lerp(fade(xi),
 				lerp(fade(yi),
 					glm::dot(glm::normalize(glm::vec2(xi, yi)), corners[0]),
 					glm::dot(glm::normalize(glm::vec2(xi, 1.0f - yi)), corners[1])),
@@ -57,7 +58,7 @@ std::vector<float> perlin(glm::vec2 coords, unsigned int seed)
 			values[i * chunkWidth + k] = clamp(value, -1.0f, 1.0f);
 		}
 	}
-	
+
 	return values; // [-1.0f, 1.0f]
 }
 
@@ -66,39 +67,25 @@ std::vector<int> terrainHeight(std::vector<float> perlin)
 	// Change from [-1.0f, 1.0f] to integer world heights
 	std::vector<int> heights(chunkLength * chunkWidth);
 	std::fill(heights.begin(), heights.end(), 1);
-	for (unsigned int i = 0; i < chunkLength*chunkWidth; i++)
+	for (unsigned int i = 0; i < chunkLength * chunkWidth; i++)
 	{
-		std::cout << perlin[i] << ", ";
-		heights[i] = round(((perlin[i] + 1.0f) * (float)(chunkHeight-3) / 2.0f));
+		heights[i] = 2;//round(((perlin[i] + 1.0f) * (float)(chunkHeight - 3) / 2.0f));
 	}
 	return heights;
 }
 
-void WorldGen::Generate() 
+void ChunkManager::Generate(unsigned int seed)
 {
-	std::vector<float> a = perlin(glm::vec2(0.0f, 0.0f), seed);
-	for (int i = 0; i < chunkLength*chunkWidth; i++)
-	{
-		std::cout << a[i] << ", ";
-	}
-	std::cout << std::endl;
 
-	chunks.push_back(Chunk(glm::vec2(0.0f, 0.0f), terrainHeight(perlin(glm::vec2(0.0f, 0.0f), seed))));
-	chunks.push_back(Chunk(glm::vec2(0.0f, 1.0f), terrainHeight(perlin(glm::vec2(0.0f, 1.0f), seed))));
-	//chunks.push_back(Chunk(glm::vec2(0.0f, -1.0f), terrainHeight(perlin(glm::vec2(0.0f, -1.0f), seed))));
+	loadedChunks.push_back(Chunk(glm::vec2(0.0f, 0.0f), terrainHeight(perlin(glm::vec2(0.0f, 0.0f), seed))));
+	loadedChunks.push_back(Chunk(glm::vec2(0.0f, 1.0f), terrainHeight(perlin(glm::vec2(0.0f, 1.0f), seed))));
+	loadedChunks.push_back(Chunk(glm::vec2(0.0f, -1.0f), terrainHeight(perlin(glm::vec2(0.0f, -1.0f), seed))));
 
-	chunks.push_back(Chunk(glm::vec2(1.0f, 0.0f), terrainHeight(perlin(glm::vec2(1.0f, 0.0f), seed))));
-	chunks.push_back(Chunk(glm::vec2(1.0f, 1.0f), terrainHeight(perlin(glm::vec2(1.0f, 1.0f), seed))));
-	//chunks.push_back(Chunk(glm::vec2(1.0f, -1.0f), terrainHeight(perlin(glm::vec2(1.0f, -1.0f), seed))));
+	loadedChunks.push_back(Chunk(glm::vec2(1.0f, 0.0f), terrainHeight(perlin(glm::vec2(1.0f, 0.0f), seed))));
+	loadedChunks.push_back(Chunk(glm::vec2(1.0f, 1.0f), terrainHeight(perlin(glm::vec2(1.0f, 1.0f), seed))));
+	loadedChunks.push_back(Chunk(glm::vec2(1.0f, -1.0f), terrainHeight(perlin(glm::vec2(1.0f, -1.0f), seed))));
 
-	//chunks.push_back(Chunk(glm::vec2(-1.0f, 1.0f), terrainHeight(perlin(glm::vec2(-1.0f, 1.0f), seed))));
-	//chunks.push_back(Chunk(glm::vec2(-1.0f, 0.0f), terrainHeight(perlin(glm::vec2(-1.0f, 0.0f), seed))));
-	//chunks.push_back(Chunk(glm::vec2(-1.0f, -1.0f), terrainHeight(perlin(glm::vec2(-1.0f, -1.0f), seed))));
-}
-
-void WorldGen::Draw(Shader& shader, Camera& camera) 
-{
-	// TODO: render distance and render only visible chunks for the player;
-	for (Chunk chunk : chunks)
-		chunk.Draw(shader, camera);
+	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, 1.0f), terrainHeight(perlin(glm::vec2(-1.0f, 1.0f), seed))));
+	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, 0.0f), terrainHeight(perlin(glm::vec2(-1.0f, 0.0f), seed))));
+	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, -1.0f), terrainHeight(perlin(glm::vec2(-1.0f, -1.0f), seed))));
 }

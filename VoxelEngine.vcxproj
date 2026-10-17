@@ -152,6 +152,7 @@
     <ClCompile Include="BlockTypes.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Chunk.cpp" />
+    <ClCompile Include="ChunkManager.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="EBO.cpp" />
     <ClCompile Include="gl.c" />
@@ -162,7 +163,7 @@
     <ClCompile Include="stb.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
-    <ClCompile Include="WorldGen.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="default.frag" />
@@ -172,6 +173,7 @@
     <ClInclude Include="BlockTypes.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Chunk.h" />
+    <ClInclude Include="ChunkManager.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="EBO.h" />
@@ -180,7 +182,7 @@
     <ClInclude Include="shaderClass.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
-    <ClInclude Include="WorldGen.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\pop_cat.png" />
