@@ -9,11 +9,10 @@ out vec3 Normal;
 out vec2 texCoord;
 
 uniform mat4 camMatrix;
-uniform mat4 model;
 
 void main()
 {
-	crntPos = vec3(model * vec4(aPos, 1.0f));
+	crntPos = aPos; 
 	Normal = aNormal;
 	texCoord = aTex;
 	
