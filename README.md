@@ -1,6 +1,6 @@
 # Voxel Engine
 
-I started from [this](www.youtube.com/watch?v=45MIykWJ-C4) tutorial series in Youtube from Victor Gordan.
+I started from [this](https://www.youtube.com/watch?v=45MIykWJ-C4) tutorial series in Youtube from Victor Gordan.
 
 Objectives (from more to less probable):
   - Different types of blocks to interact with.
