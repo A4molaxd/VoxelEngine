@@ -101,18 +101,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="brick.png">
-      <Filter>Resources\Textures</Filter>
-    </Image>
-    <Image Include="planks.png">
-      <Filter>Resources\Textures</Filter>
-    </Image>
-    <Image Include="planksSpec.png">
-      <Filter>Resources\Textures</Filter>
-    </Image>
-    <Image Include="..\pop_cat.png">
-      <Filter>Resources\Textures</Filter>
-    </Image>
     <Image Include="grassBlock.png">
       <Filter>Resources\Textures</Filter>
     </Image>

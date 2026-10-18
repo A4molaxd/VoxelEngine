@@ -1,5 +1,7 @@
 #include"Window.h"
 
+// TODO: resizeable window
+
 Window::Window(const unsigned int height, const unsigned int width, const float dt)
 {
 	Window::dt = dt;

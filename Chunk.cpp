@@ -86,6 +86,7 @@ void Chunk::CalculateMeshes()
 
 void Chunk::Update()
 {
+	CalculateFaces(occupied);
 	CalculateMeshes();
 }
 
@@ -116,7 +117,7 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 			}
 		}
 	}
-	CalculateFaces(occupied);
+	Chunk::occupied = occupied;
 	Update();
 }
 

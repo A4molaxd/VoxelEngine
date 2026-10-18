@@ -69,7 +69,7 @@ std::vector<int> terrainHeight(std::vector<float> perlin)
 	std::fill(heights.begin(), heights.end(), 1);
 	for (unsigned int i = 0; i < chunkLength * chunkWidth; i++)
 	{
-		heights[i] = 2;//round(((perlin[i] + 1.0f) * (float)(chunkHeight - 3) / 2.0f));
+		heights[i] = round(((perlin[i] + 1.0f) * (float)(chunkHeight - 3) / 2.0f));
 	}
 	return heights;
 }
