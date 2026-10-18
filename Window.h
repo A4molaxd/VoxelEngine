@@ -22,6 +22,10 @@ class Window
 		
 		void Close();
 
+		static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
+
+		void GetWindowSize(GLFWwindow* window, int* width, int* height);
+
 		double GetTimeDiff();
 		
 	private:

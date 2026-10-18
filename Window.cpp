@@ -2,7 +2,7 @@
 
 // TODO: resizeable window
 
-Window::Window(const unsigned int height, const unsigned int width, const float dt)
+Window::Window(const unsigned int width, const unsigned int height, const float dt)
 {
 	Window::dt = dt;
 	glfwInit();
@@ -23,6 +23,8 @@ Window::Window(const unsigned int height, const unsigned int width, const float 
 	if (!gladLoadGL((GLADloadfunc)glfwGetProcAddress)) {
 		std::cerr << "Failed to initialize GLAD\n";
 	}
+
+	glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
 
 	glViewport(0, 0, width, height);
 }
@@ -69,6 +71,15 @@ void Window::CalculateTimes()
 		prevTime = crntTime;
 		counter = 0;
 	}
+}
+
+void Window::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+void Window::GetWindowSize(GLFWwindow* window, int* width, int* height) {
+	glfwGetWindowSize(window, width, height);
 }
 
 double Window::GetTimeDiff()
