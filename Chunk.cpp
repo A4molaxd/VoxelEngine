@@ -65,14 +65,26 @@ void Chunk::CalculateMeshes()
 					for (unsigned int j = 0; j < 4; j++)
 					{
 						vertices[t].push_back(m[i].vertices[j]);
-					} 
-					// TODO: Change direction of the faces for culling
-					indices[t].push_back(0 + ind[t]);
-					indices[t].push_back(2 + ind[t]);
-					indices[t].push_back(1 + ind[t]);
-					indices[t].push_back(0 + ind[t]);
-					indices[t].push_back(3 + ind[t]);
-					indices[t].push_back(2 + ind[t]);
+					}
+					// Checks if it is the top face and changes the rotation of the indices for the face culling
+					if (m[i].vertices[0].normal == glm::vec3(0.0f, 1.0f, 0.0f))
+					{
+						indices[t].push_back(0 + ind[t]);
+						indices[t].push_back(2 + ind[t]);
+						indices[t].push_back(1 + ind[t]);
+						indices[t].push_back(0 + ind[t]);
+						indices[t].push_back(3 + ind[t]);
+						indices[t].push_back(2 + ind[t]);
+					}
+					else
+					{
+						indices[t].push_back(0 + ind[t]);
+						indices[t].push_back(1 + ind[t]);
+						indices[t].push_back(2 + ind[t]);
+						indices[t].push_back(0 + ind[t]);
+						indices[t].push_back(2 + ind[t]);
+						indices[t].push_back(3 + ind[t]);
+					}
 					ind[t] += 4;
 				}
 			}

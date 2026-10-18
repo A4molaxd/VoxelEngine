@@ -76,6 +76,7 @@ std::vector<int> terrainHeight(std::vector<float> perlin)
 
 void ChunkManager::Generate(unsigned int seed)
 {
+	// TODO: render distance and render only visible chunks for the player;
 
 	loadedChunks.push_back(Chunk(glm::vec2(0.0f, 0.0f), terrainHeight(perlin(glm::vec2(0.0f, 0.0f), seed))));
 	loadedChunks.push_back(Chunk(glm::vec2(0.0f, 1.0f), terrainHeight(perlin(glm::vec2(0.0f, 1.0f), seed))));
