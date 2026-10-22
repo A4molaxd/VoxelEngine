@@ -26,7 +26,7 @@ float clamp(float v, float a, float b)
 
 std::vector<float> perlin(glm::vec2 coords, unsigned int seed)
 {
-	std::vector<float> values(chunkLength * chunkWidth);
+	std::vector<float> values(CHUNK_SIZE * CHUNK_SIZE);
 	std::fill(values.begin(), values.end(), 1.0f);
 	std::vector<glm::vec2> corners; // TOP LEFT -> TOP RIGHT -> BOTTOM LEFT -> BOTTOM RIGHT
 	for (unsigned int i = 0; i < 2; i++)
@@ -36,12 +36,12 @@ std::vector<float> perlin(glm::vec2 coords, unsigned int seed)
 			corners.push_back(glm::vec2(((float)rand(coords + glm::vec2(i, j), seed) * 2.0f - 1.0f, ((float)rand2(coords + glm::vec2(i, j), seed) * 2.0f - 1.0f))));
 		}
 	}
-	for (unsigned int i = 0; i < chunkLength; i++)
+	for (unsigned int i = 0; i < CHUNK_SIZE; i++)
 	{
-		for (unsigned int k = 0; k < chunkWidth; k++)
+		for (unsigned int k = 0; k < CHUNK_SIZE; k++)
 		{
-			float xi = (float)i / (float)chunkLength;
-			float yi = (float)k / (float)chunkWidth;
+			float xi = (float)i / (float)CHUNK_SIZE;
+			float yi = (float)k / (float)CHUNK_SIZE;
 			if (i == 0 && k == 0)
 			{
 				xi = 0.001f;
@@ -55,7 +55,7 @@ std::vector<float> perlin(glm::vec2 coords, unsigned int seed)
 				lerp(fade(yi),
 					glm::dot(glm::normalize(glm::vec2(1.0f - xi, yi)), corners[2]),
 					glm::dot(glm::normalize(glm::vec2(1.0f - xi, 1.0f - yi)), corners[3])));
-			values[i * chunkWidth + k] = clamp(value, -1.0f, 1.0f);
+			values[i * CHUNK_SIZE + k] = clamp(value, -1.0f, 1.0f);
 		}
 	}
 
@@ -65,11 +65,11 @@ std::vector<float> perlin(glm::vec2 coords, unsigned int seed)
 std::vector<int> terrainHeight(std::vector<float> perlin)
 {
 	// Change from [-1.0f, 1.0f] to integer world heights
-	std::vector<int> heights(chunkLength * chunkWidth);
+	std::vector<int> heights(CHUNK_SIZE * CHUNK_SIZE);
 	std::fill(heights.begin(), heights.end(), 1);
-	for (unsigned int i = 0; i < chunkLength * chunkWidth; i++)
+	for (unsigned int i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++)
 	{
-		heights[i] = round(((perlin[i] + 1.0f) * (float)(chunkHeight - 3) / 2.0f));
+		heights[i] = round(((perlin[i] + 1.0f) * (float)(CHUNK_SIZE - 3) / 2.0f));
 	}
 	return heights;
 }

@@ -14,6 +14,10 @@ public:
 
 	Cube(glm::vec3 pos, BlockTypes type);
 
+	std::vector<std::vector<Vertex>> vertices;
+	std::vector<std::vector<GLuint>> indices;
+	std::vector<std::vector<Texture>> textures;
+
 	std::vector<Mesh> GetMeshes();
 
 private:

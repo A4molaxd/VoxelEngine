@@ -1,8 +1,6 @@
 #pragma once
 
-const unsigned int chunkHeight = 8;
-const unsigned int chunkLength = 8;
-const unsigned int chunkWidth = 8;
+const unsigned int CHUNK_SIZE = 8;
 
 struct Vertex
 {

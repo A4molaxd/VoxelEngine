@@ -4,7 +4,8 @@ Cube::Cube(glm::vec3 pos, BlockTypes type)
 {
 	Cube::pos = pos;
 	Cube::type = type;
-	if (type != BlockTypes::AIR) {
+	if (type != BlockTypes::AIR)
+	{
 		for (unsigned int i = 0; i < 6; i++)
 			ocludedFaces.push_back(true);
 
@@ -75,24 +76,15 @@ Cube::Cube(glm::vec3 pos, BlockTypes type)
 			20 - 20, 23 - 20, 22 - 20
 		};
 
-		std::vector <std::vector<Vertex>> verts;
 		for (unsigned int i = 0; i < sizeof(indices) / sizeof(GLuint); i)
-		{
-			verts.push_back({ vertices[i++], vertices[i++], vertices[i++], vertices[i++] });
-		}
-		std::vector <std::vector<GLuint>> ind;
-		for (unsigned int i = 0; i < sizeof(indices) / sizeof(GLuint); i)
-		{
-			ind.push_back({ indices[i++], indices[i++], indices[i++], indices[i++], indices[i++], indices[i++] });
-		}
-		std::vector <std::vector<Texture>> tex;
-		for (unsigned int i = 0; i < BlockType[type].size(); i)
-		{
-			tex.push_back({ BlockType[type][i++] });
-		}
+			Cube::vertices.push_back({ vertices[i++], vertices[i++], vertices[i++], vertices[i++] });
 
-		for (unsigned int i = 0; i < ind.size(); i++)
-			meshes.push_back(Mesh(verts[i], ind[i], tex[i]));
+		for (unsigned int i = 0; i < sizeof(indices) / sizeof(GLuint); i)
+			Cube::indices.push_back({ indices[i++], indices[i++], indices[i++], indices[i++], indices[i++], indices[i++] });
+
+		for (unsigned int i = 0; i < BlockType[type].size(); i)
+			Cube::textures.push_back({ BlockType[type][i++] });
+
 	}
 }
 
