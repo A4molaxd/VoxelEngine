@@ -5,7 +5,7 @@
 class ChunkManager
 {
 public:
-	int renderDistance = 2;
+	int renderDistance = 4;
 
 	std::vector<Chunk> loadedChunks;
 

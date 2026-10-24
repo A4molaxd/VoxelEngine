@@ -56,7 +56,7 @@ int main()
 			if (glfwGetKey(window.window, GLFW_KEY_R))
 				window.wireframeRendering = !window.wireframeRendering;
 		}
-		camera.UpdateMatrix(45.0f, 0.1f, 100.0f);
+		camera.UpdateMatrix(45.0f, 0.1f, 300.0f);
 
 		world.Draw(shader, camera);
 

@@ -222,7 +222,14 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 				{
 					type = j == chunkHeights[i * CHUNK_SIZE + k] ? BlockTypes::GRASS_BLOCK : BlockTypes::DIRT_BLOCK;
 				}
-					
+				if (type == BlockTypes::GRASS_BLOCK && j < 5)
+				{
+					type = BlockTypes::SAND_BLOCK;
+				}
+				if (type == BlockTypes::GRASS_BLOCK && j > 10)
+				{
+					type = BlockTypes::STONE_BLOCK;
+				}
 				cubes.push_back(Cube(glm::vec3(chunkCoords.x * CHUNK_SIZE + i, j, chunkCoords.y * CHUNK_SIZE + k), type));
 				
 			}
