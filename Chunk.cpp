@@ -153,7 +153,7 @@ void Chunk::CalculateMeshes()
 						int t = -1;
 						for (unsigned int v = 0; v < vertices.size(); v++)
 						{
-							if (cube.vertices[i][0].normal == vertices[v][0].normal) {
+							if (cube.textures[i][0].image == textures[v][0].image) {
 								t = v;
 							}
 						}
@@ -241,6 +241,6 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 
 void Chunk::Draw(Shader& shader, Camera& camera)
 {
-	for (Mesh mesh : Chunk::meshes)
-		mesh.Draw(shader, camera);
+	for (int i = 0; i < meshes.size(); i ++)
+		meshes[i].Draw(shader, camera);
 }

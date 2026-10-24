@@ -1,6 +1,6 @@
 #pragma once
 
-const unsigned int CHUNK_SIZE = 16;
+const unsigned int CHUNK_SIZE = 8;
 
 struct Vertex
 {
