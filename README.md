@@ -17,4 +17,4 @@ Resources used to look up information:
   - https://www.youtube.com/@wsalevan (Very interesting and informative videos on his Minecraft clone)
 
 Interesting issues so far:
- - As it turns out, when you do `for (Chunk chunk : loadedChunks) {...}` it takes approximately 4 ms to calculate the next item each time the code inside is executed (I think this is because I modify the element once inside), this lead to a giant leap from 20 to more than 1000 FPS when I discovered the problem.
+ - When I wrote `for (Chunk chunk : loadedChunks) {...}` it took my machine approximately 4 ms to calculate the next item each time the code inside was executed. The optimal way to do it is creating the variable by reference: `for (Chunk& chunk : loadedChunks) {...}`. Doing otherwise forced a copy constructor call for each element. Fixing this issue lead to a giant leap from 20 to more than 1000 FPS.
