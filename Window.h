@@ -8,6 +8,8 @@
 class Window 
 {
 	public:
+		bool wireframeRendering;
+
 		GLFWwindow* window;
 
 		Window(const unsigned int height, const unsigned int width, const float dt);

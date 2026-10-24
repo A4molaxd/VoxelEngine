@@ -11,8 +11,6 @@
 const unsigned int init_width = 800;
 const unsigned int init_height = 800;
 
-bool wireframeRendering = false;
-
 int width, height;
 
 const float dt = 1.0f / 30.0f;
@@ -39,8 +37,6 @@ int main()
 
 	while (!glfwWindowShouldClose(window.window)) 
 	{
-		if (wireframeRendering)
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		window.Clear();
 		
 		window.GetWindowSize(window.window, &width, &height);
@@ -59,12 +55,12 @@ int main()
 				std::cout << camera.Orientation.x << " " << camera.Orientation.y << " " << camera.Orientation.z << std::endl;
 			}
 			if (glfwGetKey(window.window, GLFW_KEY_R))
-				wireframeRendering = !wireframeRendering;
+				window.wireframeRendering = !window.wireframeRendering;
 		}
 		camera.UpdateMatrix(45.0f, 0.1f, 100.0f);
+
 		world.Draw(shader, camera);
-		if (wireframeRendering)
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 		window.Update();
 	}
 

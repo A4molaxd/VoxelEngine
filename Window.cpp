@@ -3,6 +3,7 @@
 Window::Window(const unsigned int width, const unsigned int height, const float dt)
 {
 	Window::dt = dt;
+	Window::wireframeRendering = false;
 	glfwInit();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -39,6 +40,10 @@ void Window::Options()
 
 void Window::Update()
 {
+	if (wireframeRendering)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }

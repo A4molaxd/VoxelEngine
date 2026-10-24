@@ -231,7 +231,7 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 				}
 				else 
 				{
-					type = j == chunkHeights[i * CHUNK_SIZE + k] ? BlockTypes::GRASS_BLOCK : BlockTypes::DIRT_BLOCK;
+					type = j == chunkHeights[i * CHUNK_SIZE + k] ? BlockTypes::DIRT_BLOCK : BlockTypes::DIRT_BLOCK;
 					occupied[i][j][k] = 1;
 				}
 					
