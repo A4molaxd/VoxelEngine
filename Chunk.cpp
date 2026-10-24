@@ -201,10 +201,16 @@ void Chunk::CalculateMeshes()
 	}
 }
 
+void Chunk::GreedyMeshing()
+{
+
+}
+
 void Chunk::Update()
 {
 	CalculateFaces(occupied);
 	CalculateMeshes();
+	GreedyMeshing();
 }
 
 Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)

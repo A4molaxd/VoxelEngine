@@ -22,6 +22,8 @@ public:
 
 	void CalculateMeshes();
 
+	void GreedyMeshing();
+
 private:
 	std::vector<Mesh> meshes;
 };
