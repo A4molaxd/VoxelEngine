@@ -9,4 +9,6 @@ public:
 	std::vector<Chunk> loadedChunks;
 
 	void Generate(unsigned int seed);
+
+	void Update();
 };

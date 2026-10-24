@@ -1,5 +1,7 @@
 #include"Chunk.h"
 
+using namespace ChunkData;
+
 void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 {
 	int counter = 0;
@@ -11,12 +13,58 @@ void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 			{
 				if (occupied[i][j][k])
 				{
-					if (i + 1 < CHUNK_SIZE) if (occupied[i + 1][j][k]) cubes[counter].ocludedFaces[2] = false;
-					if (i - 1 >= 0) if (occupied[i - 1][j][k]) cubes[counter].ocludedFaces[3] = false; 
-					if (j + 1 < CHUNK_SIZE) if (occupied[i][j + 1][k]) cubes[counter].ocludedFaces[0] = false;
-					if (j - 1 >= 0) if (occupied[i][j - 1][k]) cubes[counter].ocludedFaces[1] = false; 
-					if (k + 1 < CHUNK_SIZE) if (occupied[i][j][k + 1]) cubes[counter].ocludedFaces[4] = false;
-					if (k - 1 >= 0) if (occupied[i][j][k - 1]) cubes[counter].ocludedFaces[5] = false; 
+					if (i + 1 < CHUNK_SIZE)
+					{
+						if (occupied[i + 1][j][k]) cubes[counter].ocludedFaces[2] = false;
+					}
+					else
+					{
+						if (chunks.contains((chunkCoords.x + 1) * 1000 + chunkCoords.y))
+						{
+							if (chunks.at((chunkCoords.x + 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * j + CHUNK_SIZE * CHUNK_SIZE * k].type != BlockTypes::AIR) cubes[counter].ocludedFaces[2] = false;
+						}
+					}
+					if (i - 1 >= 0)
+					{
+						if (occupied[i - 1][j][k]) cubes[counter].ocludedFaces[3] = false;
+					}
+					else
+					{
+						if (chunks.contains((chunkCoords.x - 1) * 1000 + chunkCoords.y))
+						{
+							if (chunks.at((chunkCoords.x - 1) * 1000 + chunkCoords.y)[CHUNK_SIZE - 1 + CHUNK_SIZE * j + CHUNK_SIZE * CHUNK_SIZE * k].type != BlockTypes::AIR) cubes[counter].ocludedFaces[3] = false;
+						}
+					}
+					if (j + 1 < CHUNK_SIZE)
+					{
+						if (occupied[i][j + 1][k]) cubes[counter].ocludedFaces[0] = false;
+					}
+					if (j - 1 >= 0)
+					{
+						if (occupied[i][j - 1][k]) cubes[counter].ocludedFaces[1] = false;
+					}
+					if (k + 1 < CHUNK_SIZE)
+					{
+						if (occupied[i][j][k + 1]) cubes[counter].ocludedFaces[4] = false;
+					}
+					else
+					{
+						if (chunks.contains(chunkCoords.x * 1000 + (chunkCoords.y + 1)))
+						{
+							if (chunks.at(chunkCoords.x * 1000 + (chunkCoords.y + 1))[i + CHUNK_SIZE * j].type != BlockTypes::AIR) cubes[counter].ocludedFaces[4] = false;
+						}
+					}
+					if (k - 1 >= 0)
+					{
+						if (occupied[i][j][k - 1]) cubes[counter].ocludedFaces[5] = false;
+					}
+					else
+					{
+						if (chunks.contains(chunkCoords.x * 1000 + (chunkCoords.y - 1)))
+						{
+							if (chunks.at(chunkCoords.x * 1000 + (chunkCoords.y - 1))[i + CHUNK_SIZE * j + CHUNK_SIZE * CHUNK_SIZE * (CHUNK_SIZE - 1)].type != BlockTypes::AIR) cubes[counter].ocludedFaces[5] = false;
+						}
+					}
 				}
 				counter++;
 			}
@@ -55,7 +103,7 @@ void Chunk::CalculateMeshes()
 						}
 						// If the normal is not already on a sublist, create a new sublist
 						if (t == -1) {
-							t = vertices.size();
+							t = (int)vertices.size();
 							vertices.push_back(std::vector<Vertex>());
 							indices.push_back(std::vector<GLuint>());
 							textures.push_back(cube.textures[i]);
@@ -115,7 +163,7 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 			for (unsigned int k = 0; k < CHUNK_SIZE; k++)
 			{
 				BlockTypes type = BlockTypes::AIR;
-				if (j > chunkHeights[i * CHUNK_SIZE + k])
+				if (j > (unsigned) chunkHeights[i * CHUNK_SIZE + k])
 				{
 					occupied[i][j][k] = 0;
 				}
@@ -131,7 +179,6 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 		}
 	}
 	Chunk::occupied = occupied;
-	Update();
 }
 
 

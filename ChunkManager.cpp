@@ -1,5 +1,6 @@
 #include"ChunkManager.h"
 
+using namespace ChunkData;
 
 float fade(float t)
 {
@@ -89,4 +90,19 @@ void ChunkManager::Generate(unsigned int seed)
 	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, 1.0f), terrainHeight(perlin(glm::vec2(-1.0f, 1.0f), seed))));
 	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, 0.0f), terrainHeight(perlin(glm::vec2(-1.0f, 0.0f), seed))));
 	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, -1.0f), terrainHeight(perlin(glm::vec2(-1.0f, -1.0f), seed))));
+
+	for (int i = 0; i < loadedChunks.size(); i++)
+	{
+		//chunks[i] = loadedChunks[i].cubes;
+		chunks[(int) (loadedChunks[i].chunkCoords.x * 1000 + loadedChunks[i].chunkCoords.y)] = loadedChunks[i].cubes;
+	}
+}
+
+void ChunkManager::Update()
+{
+	for (int i = 0; i < loadedChunks.size(); i++)
+	{
+		loadedChunks[i].Update();
+		//chunks[(int) (loadedChunks[i].chunkCoords.x * 10000 + loadedChunks[i].chunkCoords.y)] = loadedChunks[i].cubes;
+	}
 }

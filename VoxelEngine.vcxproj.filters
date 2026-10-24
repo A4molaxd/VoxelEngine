@@ -52,6 +52,9 @@
     <ClCompile Include="Light.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="ChunkData.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -97,6 +100,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkData.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

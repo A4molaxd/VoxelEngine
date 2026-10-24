@@ -27,6 +27,7 @@ int main()
 
 	World world;
 	world.chunkManager.Generate(world.seed);
+	world.chunkManager.Update();
 
 	Light light(glm::vec3(1.0f), glm::vec4(1.0f));
 	light.Activate(shader);
