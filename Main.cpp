@@ -32,7 +32,7 @@ int main()
 	Light light(glm::vec3(1.0f), glm::vec4(1.0f));
 	light.Activate(shader);
 
-	Camera camera(init_width, init_height, glm::vec3(0.0f, 0.0f, 20.0f));
+	Camera camera(init_width, init_height, glm::vec3(-16.4f, 22.2f, 24.1f));
 
 	while (!glfwWindowShouldClose(window.window)) 
 	{
@@ -47,6 +47,12 @@ int main()
 		if (window.GetTimeDiff() >= dt)
 		{
 			camera.Inputs(window.window);
+
+			if (glfwGetKey(window.window, GLFW_KEY_P))
+			{
+				std::cout << world.GetCube(5, 5, 0).type << std::endl;
+				std::cout << camera.Orientation.x << " " << camera.Orientation.y << " " << camera.Orientation.z << std::endl;
+			}
 		}
 		camera.UpdateMatrix(45.0f, 0.1f, 100.0f);
 

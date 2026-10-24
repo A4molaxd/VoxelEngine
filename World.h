@@ -2,6 +2,8 @@
 
 #include"ChunkManager.h"
 
+using namespace ChunkData;
+
 class World
 {
 public:
