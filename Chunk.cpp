@@ -4,69 +4,125 @@ using namespace ChunkData;
 
 void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 {
-	int counter = 0;
 	for (int i = 0; i < CHUNK_SIZE; i++)
 	{
 		for (int j = 0; j < CHUNK_SIZE; j++)
 		{
 			for (int k = 0; k < CHUNK_SIZE; k++)
 			{
-				if (occupied[i][j][k])
+				if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].type != BlockTypes::AIR)
 				{
-					if (i + 1 < CHUNK_SIZE)
+					if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[2] != false)
 					{
-						if (occupied[i + 1][j][k]) cubes[counter].ocludedFaces[2] = false;
-					}
-					else
-					{
-						if (chunks.contains((chunkCoords.x + 1) * 1000 + chunkCoords.y))
+						if (i + 1 < CHUNK_SIZE)
 						{
-							if (chunks.at((chunkCoords.x + 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * j + CHUNK_SIZE * CHUNK_SIZE * k].type != BlockTypes::AIR) cubes[counter].ocludedFaces[2] = false;
+							if (cubes[CHUNK_SIZE * CHUNK_SIZE * (i + 1) + CHUNK_SIZE * j + k].type != BlockTypes::AIR)
+							{
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[2] = false;
+								cubes[CHUNK_SIZE * CHUNK_SIZE * (i + 1) + CHUNK_SIZE * j + k].ocludedFaces[3] = false;
+							}
+						}
+						else
+						{
+							if (chunks.contains((chunkCoords.x + 1) * 1000 + chunkCoords.y))
+							{
+								if (chunks.at((chunkCoords.x + 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * j + k].type != BlockTypes::AIR)
+								{
+									cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[2] = false;
+									chunks.at((chunkCoords.x + 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * j + k].ocludedFaces[3] = false;
+								}
+							}
 						}
 					}
-					if (i - 1 >= 0)
+					if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[3] != false)
 					{
-						if (occupied[i - 1][j][k]) cubes[counter].ocludedFaces[3] = false;
-					}
-					else
-					{
-						if (chunks.contains((chunkCoords.x - 1) * 1000 + chunkCoords.y))
+						if (i - 1 >= 0)
 						{
-							if (chunks.at((chunkCoords.x - 1) * 1000 + chunkCoords.y)[CHUNK_SIZE - 1 + CHUNK_SIZE * j + CHUNK_SIZE * CHUNK_SIZE * k].type != BlockTypes::AIR) cubes[counter].ocludedFaces[3] = false;
+							if (cubes[CHUNK_SIZE * CHUNK_SIZE * (i - 1) + CHUNK_SIZE * j + k].type != BlockTypes::AIR)
+							{
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[3] = false;
+								cubes[CHUNK_SIZE * CHUNK_SIZE * (i - 1) + CHUNK_SIZE * j + k].ocludedFaces[2] = false;
+							}
+						}
+						else
+						{
+							if (chunks.contains((chunkCoords.x - 1) * 1000 + chunkCoords.y))
+							{
+								if (chunks.at((chunkCoords.x - 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * CHUNK_SIZE * (CHUNK_SIZE - 1) + CHUNK_SIZE * j + k].type != BlockTypes::AIR)
+								{
+									cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[3] = false;
+									chunks.at((chunkCoords.x - 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * CHUNK_SIZE * (CHUNK_SIZE - 1) + CHUNK_SIZE * j + k].ocludedFaces[2] = false;
+								}
+							}
 						}
 					}
-					if (j + 1 < CHUNK_SIZE)
+					if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[0] != false)
 					{
-						if (occupied[i][j + 1][k]) cubes[counter].ocludedFaces[0] = false;
-					}
-					if (j - 1 >= 0)
-					{
-						if (occupied[i][j - 1][k]) cubes[counter].ocludedFaces[1] = false;
-					}
-					if (k + 1 < CHUNK_SIZE)
-					{
-						if (occupied[i][j][k + 1]) cubes[counter].ocludedFaces[4] = false;
-					}
-					else
-					{
-						if (chunks.contains(chunkCoords.x * 1000 + (chunkCoords.y + 1)))
+						if (j + 1 < CHUNK_SIZE)
 						{
-							if (chunks.at(chunkCoords.x * 1000 + (chunkCoords.y + 1))[i + CHUNK_SIZE * j].type != BlockTypes::AIR) cubes[counter].ocludedFaces[4] = false;
+							if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * (j + 1) + k].type != BlockTypes::AIR)
+							{
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[0] = false;
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * (j + 1) + k].ocludedFaces[1] = false;
+							}
 						}
 					}
-					if (k - 1 >= 0)
+					if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[1] != false)
 					{
-						if (occupied[i][j][k - 1]) cubes[counter].ocludedFaces[5] = false;
-					}
-					else
-					{
-						if (chunks.contains(chunkCoords.x * 1000 + (chunkCoords.y - 1)))
+						if (j - 1 >= 0)
 						{
-							if (chunks.at(chunkCoords.x * 1000 + (chunkCoords.y - 1))[i + CHUNK_SIZE * j + CHUNK_SIZE * CHUNK_SIZE * (CHUNK_SIZE - 1)].type != BlockTypes::AIR) cubes[counter].ocludedFaces[5] = false;
+							if (cubes[i + CHUNK_SIZE * (j - 1) + CHUNK_SIZE * CHUNK_SIZE * k].type != BlockTypes::AIR)
+							{
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[1] = false;
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * (j - 1) +k].ocludedFaces[0] = false;
+							}
+						}
+					}
+					if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[4] != false)
+					{
+						if (k + 1 < CHUNK_SIZE)
+						{
+							if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (k + 1)].type != BlockTypes::AIR)
+							{
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[4] = false;
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (k + 1)].ocludedFaces[5] = false;
+							}
+						}
+						else
+						{
+							if (chunks.contains(chunkCoords.x * 1000 + (chunkCoords.y + 1)))
+							{
+								if (chunks.at(chunkCoords.x * 1000 + (chunkCoords.y + 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j].type != BlockTypes::AIR)
+								{
+									cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[4] = false;
+									chunks.at(chunkCoords.x * 1000 + (chunkCoords.y + 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j].ocludedFaces[5] = false;
+								}
+							}
+						}
+					}
+					if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[5] != false)
+					{
+						if (k - 1 >= 0)
+						{
+							if (cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (k - 1)].type != BlockTypes::AIR)
+							{
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[5] = false;
+								cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (k - 1)].ocludedFaces[4] = false;
+							}
+						}
+						else
+						{
+							if (chunks.contains(chunkCoords.x * 1000 + (chunkCoords.y - 1)))
+							{
+								if (chunks.at(chunkCoords.x * 1000 + (chunkCoords.y - 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (CHUNK_SIZE - 1)].type != BlockTypes::AIR)
+								{
+									cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[5] = false;
+									chunks.at(chunkCoords.x * 1000 + (chunkCoords.y - 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (CHUNK_SIZE - 1)].ocludedFaces[4] = false;
+								}
+							}
 						}
 					}
 				}
-				counter++;
 			}
 		}
 	}

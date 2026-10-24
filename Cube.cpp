@@ -4,11 +4,12 @@ Cube::Cube(glm::vec3 pos, BlockTypes type)
 {
 	Cube::pos = pos;
 	Cube::type = type;
+
+	for (unsigned int i = 0; i < 6; i++)
+		ocludedFaces.push_back(true);
+
 	if (type != BlockTypes::AIR)
 	{
-		for (unsigned int i = 0; i < 6; i++)
-			ocludedFaces.push_back(true);
-
 		Vertex vertices[] =
 		{
 
@@ -86,15 +87,4 @@ Cube::Cube(glm::vec3 pos, BlockTypes type)
 			Cube::textures.push_back({ BlockType[type][i++] });
 
 	}
-}
-
-std::vector<Mesh> Cube::GetMeshes() 
-{
-	std::vector<Mesh> _meshes;
-	for (unsigned int i = 0; i < meshes.size(); i++)
-	{
-		if (ocludedFaces[i])
-			_meshes.push_back(meshes[i]);
-	}
-	return _meshes;
 }

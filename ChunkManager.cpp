@@ -94,7 +94,7 @@ void ChunkManager::Generate(unsigned int seed)
 	for (int i = 0; i < loadedChunks.size(); i++)
 	{
 		//chunks[i] = loadedChunks[i].cubes;
-		chunks[(int) (loadedChunks[i].chunkCoords.x * 1000 + loadedChunks[i].chunkCoords.y)] = loadedChunks[i].cubes;
+		chunks[(loadedChunks[i].chunkCoords.x * 1000 + loadedChunks[i].chunkCoords.y)] = loadedChunks[i].cubes;
 	}
 }
 

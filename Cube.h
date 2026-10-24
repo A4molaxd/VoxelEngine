@@ -18,8 +18,6 @@ public:
 	std::vector<std::vector<GLuint>> indices;
 	std::vector<std::vector<Texture>> textures;
 
-	std::vector<Mesh> GetMeshes();
-
 private:
 	std::vector<Mesh> meshes;
 };
