@@ -201,16 +201,10 @@ void Chunk::CalculateMeshes()
 	}
 }
 
-void Chunk::GreedyMeshing()
-{
-
-}
-
 void Chunk::Update()
 {
 	CalculateFaces(occupied);
 	CalculateMeshes();
-	GreedyMeshing();
 }
 
 Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
@@ -231,7 +225,7 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 				}
 				else 
 				{
-					type = j == chunkHeights[i * CHUNK_SIZE + k] ? BlockTypes::DIRT_BLOCK : BlockTypes::DIRT_BLOCK;
+					type = j == chunkHeights[i * CHUNK_SIZE + k] ? BlockTypes::GRASS_BLOCK : BlockTypes::DIRT_BLOCK;
 					occupied[i][j][k] = 1;
 				}
 					
@@ -247,7 +241,6 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 
 void Chunk::Draw(Shader& shader, Camera& camera)
 {
-	// TODO: Greedy meshing and other chunk rendering optimization techniques
 	for (Mesh mesh : Chunk::meshes)
 		mesh.Draw(shader, camera);
 }

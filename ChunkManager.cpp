@@ -82,17 +82,14 @@ void ChunkManager::Generate(unsigned int seed)
 	loadedChunks.push_back(Chunk(glm::vec2(0.0f, 0.0f), terrainHeight(perlin(glm::vec2(0.0f, 0.0f), seed))));
 	loadedChunks.push_back(Chunk(glm::vec2(0.0f, 1.0f), terrainHeight(perlin(glm::vec2(0.0f, 1.0f), seed))));
 	loadedChunks.push_back(Chunk(glm::vec2(0.0f, -1.0f), terrainHeight(perlin(glm::vec2(0.0f, -1.0f), seed))));
-	loadedChunks.push_back(Chunk(glm::vec2(0.0f, 2.0f), terrainHeight(perlin(glm::vec2(0.0f, 2.0f), seed))));
 
 	loadedChunks.push_back(Chunk(glm::vec2(1.0f, 0.0f), terrainHeight(perlin(glm::vec2(1.0f, 0.0f), seed))));
 	loadedChunks.push_back(Chunk(glm::vec2(1.0f, 1.0f), terrainHeight(perlin(glm::vec2(1.0f, 1.0f), seed))));
 	loadedChunks.push_back(Chunk(glm::vec2(1.0f, -1.0f), terrainHeight(perlin(glm::vec2(1.0f, -1.0f), seed))));
-	loadedChunks.push_back(Chunk(glm::vec2(1.0f, 2.0f), terrainHeight(perlin(glm::vec2(1.0f, 2.0f), seed))));
 
 	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, 1.0f), terrainHeight(perlin(glm::vec2(-1.0f, 1.0f), seed))));
 	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, 0.0f), terrainHeight(perlin(glm::vec2(-1.0f, 0.0f), seed))));
 	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, -1.0f), terrainHeight(perlin(glm::vec2(-1.0f, -1.0f), seed))));
-	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, 2.0f), terrainHeight(perlin(glm::vec2(-1.0f, 2.0f), seed))));
 
 	for (int i = 0; i < loadedChunks.size(); i++)
 	{

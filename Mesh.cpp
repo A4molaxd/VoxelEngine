@@ -22,13 +22,10 @@ Mesh::Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::v
 
 void Mesh::Draw(Shader& shader, Camera& camera)
 {
-	shader.Activate();
 	VAO.Bind();
 
 	textures[0].texUnit(shader, "tex", 0);
 	textures[0].Bind();
-	glUniform3f(glGetUniformLocation(shader.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-	camera.Matrix(shader, "camMatrix");
 
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }

@@ -2,9 +2,12 @@
 
 void World::Draw(Shader& shader, Camera& camera)
 {
+	shader.Activate();
+	glUniform3f(glGetUniformLocation(shader.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+	camera.Matrix(shader, "camMatrix");
+
 	for (Chunk chunk : chunkManager.loadedChunks)
 		chunk.Draw(shader, camera);
-
 }
 
 Cube World::GetCube(int x, int y, int z)
