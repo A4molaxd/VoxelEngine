@@ -51,7 +51,6 @@ int main()
 
 			if (glfwGetKey(window.window, GLFW_KEY_P))
 			{
-				std::cout << world.GetCube(5, 5, 0).type << std::endl;
 				std::cout << camera.Orientation.x << " " << camera.Orientation.y << " " << camera.Orientation.z << std::endl;
 			}
 			if (glfwGetKey(window.window, GLFW_KEY_R))

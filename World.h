@@ -12,6 +12,4 @@ public:
 	ChunkManager chunkManager;
 
 	void Draw(Shader& shader, Camera& camera);
-
-	Cube GetCube(int x, int y, int z);
 };

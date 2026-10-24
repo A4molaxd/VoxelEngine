@@ -2,7 +2,7 @@
 
 using namespace ChunkData;
 
-void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
+void Chunk::CalculateFaces()
 {
 	for (int i = 0; i < CHUNK_SIZE; i++)
 	{
@@ -24,12 +24,12 @@ void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 						}
 						else
 						{
-							if (chunks.contains((chunkCoords.x + 1) * 1000 + chunkCoords.y))
+							if (chunks.contains((chunkCoords.x + 1) * 100000 + chunkCoords.y))
 							{
-								if (chunks.at((chunkCoords.x + 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * j + k].type != BlockTypes::AIR)
+								if (chunks.at((chunkCoords.x + 1) * 100000 + chunkCoords.y)[CHUNK_SIZE * j + k].type != BlockTypes::AIR)
 								{
 									cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[2] = false;
-									chunks.at((chunkCoords.x + 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * j + k].ocludedFaces[3] = false;
+									chunks.at((chunkCoords.x + 1) * 100000 + chunkCoords.y)[CHUNK_SIZE * j + k].ocludedFaces[3] = false;
 								}
 							}
 						}
@@ -46,12 +46,12 @@ void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 						}
 						else
 						{
-							if (chunks.contains((chunkCoords.x - 1) * 1000 + chunkCoords.y))
+							if (chunks.contains((chunkCoords.x - 1) * 100000 + chunkCoords.y))
 							{
-								if (chunks.at((chunkCoords.x - 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * CHUNK_SIZE * (CHUNK_SIZE - 1) + CHUNK_SIZE * j + k].type != BlockTypes::AIR)
+								if (chunks.at((chunkCoords.x - 1) * 100000 + chunkCoords.y)[CHUNK_SIZE * CHUNK_SIZE * (CHUNK_SIZE - 1) + CHUNK_SIZE * j + k].type != BlockTypes::AIR)
 								{
 									cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[3] = false;
-									chunks.at((chunkCoords.x - 1) * 1000 + chunkCoords.y)[CHUNK_SIZE * CHUNK_SIZE * (CHUNK_SIZE - 1) + CHUNK_SIZE * j + k].ocludedFaces[2] = false;
+									chunks.at((chunkCoords.x - 1) * 100000 + chunkCoords.y)[CHUNK_SIZE * CHUNK_SIZE * (CHUNK_SIZE - 1) + CHUNK_SIZE * j + k].ocludedFaces[2] = false;
 								}
 							}
 						}
@@ -90,12 +90,12 @@ void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 						}
 						else
 						{
-							if (chunks.contains(chunkCoords.x * 1000 + (chunkCoords.y + 1)))
+							if (chunks.contains(chunkCoords.x * 100000 + (chunkCoords.y + 1)))
 							{
-								if (chunks.at(chunkCoords.x * 1000 + (chunkCoords.y + 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j].type != BlockTypes::AIR)
+								if (chunks.at(chunkCoords.x * 100000 + (chunkCoords.y + 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j].type != BlockTypes::AIR)
 								{
 									cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[4] = false;
-									chunks.at(chunkCoords.x * 1000 + (chunkCoords.y + 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j].ocludedFaces[5] = false;
+									chunks.at(chunkCoords.x * 100000 + (chunkCoords.y + 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j].ocludedFaces[5] = false;
 								}
 							}
 						}
@@ -112,12 +112,12 @@ void Chunk::CalculateFaces(std::vector<std::vector<std::vector<int>>> occupied)
 						}
 						else
 						{
-							if (chunks.contains(chunkCoords.x * 1000 + (chunkCoords.y - 1)))
+							if (chunks.contains(chunkCoords.x * 100000 + (chunkCoords.y - 1)))
 							{
-								if (chunks.at(chunkCoords.x * 1000 + (chunkCoords.y - 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (CHUNK_SIZE - 1)].type != BlockTypes::AIR)
+								if (chunks.at(chunkCoords.x * 100000 + (chunkCoords.y - 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (CHUNK_SIZE - 1)].type != BlockTypes::AIR)
 								{
 									cubes[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + k].ocludedFaces[5] = false;
-									chunks.at(chunkCoords.x * 1000 + (chunkCoords.y - 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (CHUNK_SIZE - 1)].ocludedFaces[4] = false;
+									chunks.at(chunkCoords.x * 100000 + (chunkCoords.y - 1))[CHUNK_SIZE * CHUNK_SIZE * i + CHUNK_SIZE * j + (CHUNK_SIZE - 1)].ocludedFaces[4] = false;
 								}
 							}
 						}
@@ -203,14 +203,13 @@ void Chunk::CalculateMeshes()
 
 void Chunk::Update()
 {
-	CalculateFaces(occupied);
+	CalculateFaces();
 	CalculateMeshes();
 }
 
 Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 {
 	Chunk::chunkCoords = chunkCoords;
-	std::vector<std::vector<std::vector<int>>> occupied(CHUNK_SIZE +1, std::vector<std::vector<int>>(CHUNK_SIZE +1, std::vector<int>(CHUNK_SIZE +1, false)));
 
 	for (unsigned int i = 0; i < CHUNK_SIZE; i++)
 	{
@@ -219,14 +218,9 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 			for (unsigned int k = 0; k < CHUNK_SIZE; k++)
 			{
 				BlockTypes type = BlockTypes::AIR;
-				if (j > (unsigned) chunkHeights[i * CHUNK_SIZE + k])
-				{
-					occupied[i][j][k] = 0;
-				}
-				else 
+				if (j <= (unsigned) chunkHeights[i * CHUNK_SIZE + k])
 				{
 					type = j == chunkHeights[i * CHUNK_SIZE + k] ? BlockTypes::GRASS_BLOCK : BlockTypes::DIRT_BLOCK;
-					occupied[i][j][k] = 1;
 				}
 					
 				cubes.push_back(Cube(glm::vec3(chunkCoords.x * CHUNK_SIZE + i, j, chunkCoords.y * CHUNK_SIZE + k), type));
@@ -234,7 +228,6 @@ Chunk::Chunk(glm::vec2 chunkCoords, std::vector<int> chunkHeights)
 			}
 		}
 	}
-	Chunk::occupied = occupied;
 }
 
 

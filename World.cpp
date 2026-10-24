@@ -9,7 +9,3 @@ void World::Draw(Shader& shader, Camera& camera)
 		chunkManager.loadedChunks[i].Draw(shader, camera);
 }
 
-Cube World::GetCube(int x, int y, int z)
-{
-	return chunks[floor(x/16) * 1000 + floor(z/16)][CHUNK_SIZE * CHUNK_SIZE * (x%16) + CHUNK_SIZE * y + (z%16)];
-}

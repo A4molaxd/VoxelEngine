@@ -78,23 +78,17 @@ std::vector<int> terrainHeight(std::vector<float> perlin)
 void ChunkManager::Generate(unsigned int seed)
 {
 	// TODO: render distance and render only visible chunks for the player;
-
-	loadedChunks.push_back(Chunk(glm::vec2(0.0f, 0.0f), terrainHeight(perlin(glm::vec2(0.0f, 0.0f), seed))));
-	loadedChunks.push_back(Chunk(glm::vec2(0.0f, 1.0f), terrainHeight(perlin(glm::vec2(0.0f, 1.0f), seed))));
-	loadedChunks.push_back(Chunk(glm::vec2(0.0f, -1.0f), terrainHeight(perlin(glm::vec2(0.0f, -1.0f), seed))));
-
-	loadedChunks.push_back(Chunk(glm::vec2(1.0f, 0.0f), terrainHeight(perlin(glm::vec2(1.0f, 0.0f), seed))));
-	loadedChunks.push_back(Chunk(glm::vec2(1.0f, 1.0f), terrainHeight(perlin(glm::vec2(1.0f, 1.0f), seed))));
-	loadedChunks.push_back(Chunk(glm::vec2(1.0f, -1.0f), terrainHeight(perlin(glm::vec2(1.0f, -1.0f), seed))));
-
-	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, 1.0f), terrainHeight(perlin(glm::vec2(-1.0f, 1.0f), seed))));
-	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, 0.0f), terrainHeight(perlin(glm::vec2(-1.0f, 0.0f), seed))));
-	loadedChunks.push_back(Chunk(glm::vec2(-1.0f, -1.0f), terrainHeight(perlin(glm::vec2(-1.0f, -1.0f), seed))));
+	for (int i = -renderDistance; i < renderDistance; i++)
+	{
+		for (int j = -renderDistance; j < renderDistance; j++)
+		{
+			loadedChunks.push_back(Chunk(glm::vec2(i, j), terrainHeight(perlin(glm::vec2(i, j), seed))));
+		}
+	}
 
 	for (int i = 0; i < loadedChunks.size(); i++)
 	{
-		//chunks[i] = loadedChunks[i].cubes;
-		chunks[(loadedChunks[i].chunkCoords.x * 1000 + loadedChunks[i].chunkCoords.y)] = loadedChunks[i].cubes;
+		chunks[(loadedChunks[i].chunkCoords.x * 100000 + loadedChunks[i].chunkCoords.y)] = loadedChunks[i].cubes;
 	}
 }
 
@@ -103,6 +97,5 @@ void ChunkManager::Update()
 	for (int i = 0; i < loadedChunks.size(); i++)
 	{
 		loadedChunks[i].Update();
-		//chunks[(int) (loadedChunks[i].chunkCoords.x * 10000 + loadedChunks[i].chunkCoords.y)] = loadedChunks[i].cubes;
 	}
 }
